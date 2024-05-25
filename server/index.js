@@ -1,17 +1,26 @@
-completion1 = client.chat.completions.create(
-    model="llama3-70b-8192",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are an expert in nutrition and meal planning. Create healthy food recipes for a full week (breakfast, lunch, and dinner) based on the user's dietary needs and preferences. Ensure the recipes are nutritious, balanced, and meet the specified nutritional targets. Provide clear, step-by-step instructions for each recipe. Each meal should consist of only one food item, and ensure that the overall daily intake meets the specified protein and calorie targets. Include the macronutrient breakdown (protein, carbs, fats) for each food item. Handle cases where specific targets like kcals or protein amounts are not provided by including generally accepted nutritional guidelines. Do not include snacks in the menu."
-        },
-        {
-            "role": "user",
-            "content": "I am overweight and I want to lose some weight. I am training in the gym regularly. I follow a vegan diet. I like to eat avocados, chickpeas, and spinach."
-        },
-        {
-            "role": "assistant",
-            "content": """**Monday**
+const express = require('express');
+const cors = require('cors')
+const Groq = require('groq-sdk');
+
+const app = express()
+app.use(express.json())
+app.use(cors())
+const groq = new Groq({apiKey: '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'});
+
+app.get('/message', async (req, res) => {
+  const chatCompletion1 = await groq.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: "You are an expert in nutrition and meal planning. Create healthy food recipes for a full week (breakfast, lunch, and dinner) based on the user's dietary needs and preferences. Ensure the recipes are nutritious, balanced, and meet the specified nutritional targets. Provide clear, step-by-step instructions for each recipe. Each meal should consist of only one food item, and ensure that the overall daily intake meets the specified protein and calorie targets. Include the macronutrient breakdown (protein, carbs, fats) for each food item. Handle cases where specific targets like kcals or protein amounts are not provided by including generally accepted nutritional guidelines. Do not include snacks in the menu."
+      },
+      {
+        role: "user",
+        content: "I am overweight and I want to lose some weight. I am training in the gym regularly. I follow a vegan diet. I like to eat avocados, chickpeas, and spinach."
+      },
+      {
+        role: "assistant",
+        content: `**Monday**
 - Breakfast: Avocado Toast with Scrambled Tofu (400 kcal, 20g protein, 40g carbs, 20g fat)
   - Toast whole grain bread, mash avocado, and top with scrambled tofu, salt, and pepper
 - Lunch: Chickpea and Spinach Salad (400 kcal, 20g protein, 40g carbs, 20g fat)
@@ -59,15 +68,15 @@ completion1 = client.chat.completions.create(
 - Lunch: Quinoa and Black Bean Bowl with Roasted Vegetables (500 kcal, 20g protein, 60g carbs, 20g fat)
   - Cook quinoa and black beans, roast vegetables like broccoli and sweet potatoes, and serve together
 - Dinner: Lentil Soup with Whole Grain Bread (500 kcal, 20g protein, 60g carbs, 20g fat)
-  - Cook lentils with vegetables and spices, serve with whole grain bread and a side salad"""
-        },
-        {
-            'role': 'user',
-            'content': "I'm skinny and I'm training in the gym. I want to build muscles mass. For full day I want to have more than 150 grams of protein and 3500 kcals. I follow carnivore diet. I like to eat fish, tomatoes, sweet potatoes."
-        },
-        {
-            "role": "assistant",
-            "content": """**Monday**
+  - Cook lentils with vegetables and spices, serve with whole grain bread and a side salad`
+      },
+      {
+        role: 'user',
+        content: "I'm skinny and I'm training in the gym. I want to build muscles mass. For full day I want to have more than 150 grams of protein and 3500 kcals. I follow carnivore diet. I like to eat fish, tomatoes, sweet potatoes."
+      },
+      {
+        role: "assistant",
+        content: `**Monday**
 - Breakfast: Grilled Salmon with Scrambled Eggs and Sweet Potato Hash (800 kcal, 60g protein, 60g carbs, 40g fat)
   - Grill salmon fillet, scramble eggs, and roast diced sweet potatoes with olive oil and salt
 - Lunch: Turkey and Bacon Wrap with Tomatoes (1200 kcal, 80g protein, 80g carbs, 60g fat)
@@ -118,34 +127,34 @@ completion1 = client.chat.completions.create(
 - Lunch: Beef and Tomato Kabobs with Sweet Potato Wedges (1200 kcal, 80g protein, 80g carbs, 60g fat)
   - Grill beef strips and kabob with cherry tomatoes, serve with baked sweet potato wedges
 - Dinner: Pork Chops with Roasted Sweet Potatoes and Green Beans (1400 kcal, 100g protein, 60g carbs, 70g fat)
-  - Grill pork chops to desired doneness, roast sweet potatoes with olive oil and salt, and steam green beans
-            """
-        },
-        {
-            "role": "user",
-            "content": "I'm maintaining my current weight. For a full day, I want to have around 2000 kcals. I follow a balanced diet. I like to eat avocados, chickpeas, and spinach."
-        }
+  - Grill pork chops to desired doneness, roast sweet potatoes with olive oil and salt, and steam green beans`
+      },
+      {
+        role: "user",
+        content: "I'm maintaining my current weight. For a full day, I want to have around 2000 kcals. I follow a balanced diet. I like to eat avocados, chickpeas, and spinach."
+      }
     ],
-    temperature=1,
-    max_tokens=3530,
-    top_p=1,
-    stream=True,
-    stop=None,
-)
+    model: "llama3-70b-8192",
+    temperature: 1,
+    max_tokens: 3530,
+    top_p: 1,
+    stream: true,
+    stop: null
+  })
 
-for await (const chunk of chatCompletion) {
-    process.stdout.write(chunk.choices[0]?.delta?.content | | '');
-}
+  let text1 = ''
 
-print(text1)
+  for await (const chunk of chatCompletion1) {
+    text1 += chunk.choices[0]?.delta?.content || '';
+  }
 
-completion2 = client.chat.completions.create(
-    model="llama3-70b-8192",
-    messages=[
-        {
-            "role": "system",
-            "content": """
-            You are an expert in extracting and organizing meal plans. Your task is to convert a given meal plan text into a structured array format. Each day of the week should be included as an object in the array, with meals for breakfast, lunch, and dinner specified. Each meal should contain the meal name and clear instructions for preparation. Ensure that the output is in a consistent and readable format.
+  console.log(text1)
+
+  const chatCompletion2 = await groq.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: `You are an expert in extracting and organizing meal plans. Your task is to convert a given meal plan text into a structured array format. Each day of the week should be included as an object in the array, with meals for breakfast, lunch, and dinner specified. Each meal should contain the meal name and clear instructions for preparation. Ensure that the output is in a consistent and readable format.
 
 Example user prompt: "Here is a sample meal plan that meets your requirements: Monday ... Sunday"
 
@@ -172,13 +181,11 @@ Output Format:
         ]
     },
     ...
-]
-            """
-        },
-        {
-            "role": "user",
-            "content": """
-            Here's a 7-day meal plan tailored to your preferences and dietary needs:
+]`
+      },
+      {
+        role: "user",
+        content: `Here's a 7-day meal plan tailored to your preferences and dietary needs:
 
 **Monday**
 - Breakfast: Avocado Toast with Scrambled Eggs (400 kcal, 20g protein, 40g carbs, 20g fat)
@@ -237,12 +244,11 @@ Output Format:
   - Bake chicken thighs with olive oil and herbs, roast broccoli with olive oil and salt, and cook quinoa according to package instructions
 
 This meal plan provides approximately 2000 kcal per day, with a balance of protein, carbohydrates, and fat. It also includes a variety of fruits and vegetables, who
-le grains, and lean protein sources.
-            """
-        },
-        {
-            "role": "assistant",
-            "content": """[
+le grains, and lean protein sources.`
+      },
+      {
+        role: "assistant",
+        content: `[
     {
         "day": "Monday",
         "meals": [
@@ -386,24 +392,50 @@ ions"
             }
         ]
     }
-]
-"""
-        },
-        {
-            "role": "user",
-            "content": text1
-        }
+]`
+      },
+      {
+        role: "user",
+        content: text1
+      }
     ],
-    temperature=1,
-    max_tokens=3530,
-    top_p=1,
-    stream=True,
-    stop=None,
-)
+    model: "llama3-70b-8192",
+    temperature: 1,
+    max_tokens: 3530,
+    top_p: 1,
+    stream: true,
+    stop: null
+  })
 
-text2 = ""
+  let text2 = ''
 
-for chunk in completion2:
-    text2 += chunk.choices[0].delta.content or ""
+  for await (const chunk of chatCompletion2) {
+    text2 += chunk.choices[0]?.delta?.content || '';
+  }
 
-print(text2)
+  console.log(extractSubstring(text2))
+
+  const data = JSON.parse(extractSubstring(text2))
+  res.status(200).json(data)
+})
+
+function extractSubstring(str) {
+  // Find the index of the first '['
+  const firstIndex = str.indexOf('[');
+  // Find the index of the last ']'
+  const lastIndex = str.lastIndexOf(']');
+
+  // Check if both '[' and ']' are present in the string
+  if (firstIndex !== -1 && lastIndex !== -1 && firstIndex < lastIndex) {
+    // Extract and return the substring
+    return str.substring(firstIndex, lastIndex + 1);
+  } else {
+    // Return an empty string if the conditions are not met
+    return '';
+  }
+}
+
+
+app.listen(8000, () => {
+  console.log('Listening on port 8000...')
+})
