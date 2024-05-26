@@ -37,7 +37,7 @@ export default function DocsPage() {
 
 
   async function addMealsToDB(meals: any[]) {
-    const res = await fetch('http://localhost:8000/api/v1/meals', {
+    const res = await fetch('https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/meals', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export default function DocsPage() {
   }
 
   async function setupMeals() {
-    const res = await fetch('http://localhost:8000/api/v1/groq', {
+    const res = await fetch('https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/groq', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -125,7 +125,7 @@ export default function DocsPage() {
 
   async function registerCall(agentId: string) {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/retell/register-call', {
+      const response = await fetch('https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/retell/register-call', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -151,7 +151,7 @@ export default function DocsPage() {
 
   useEffect(() => {
     const getMeals = async () => {
-      const response = await fetch(`http://localhost:8000/api/v1/meals/${username}`)
+      const response = await fetch(`https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/meals/${username}`)
       const data = await response.json()
 
       const updatedState = planForDays.map((stateEntry: any) => {

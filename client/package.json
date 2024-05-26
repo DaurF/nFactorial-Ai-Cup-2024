@@ -44,6 +44,5 @@
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "typescript": "5.0.4"
-  },
-  "proxy": "http://localhost:8000"
+  }
 }

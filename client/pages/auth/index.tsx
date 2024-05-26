@@ -27,7 +27,7 @@ export default function DocsPage() {
   async function register(e: Event) {
     e.preventDefault()
 
-    const res = await fetch('http://localhost:8000/api/v1/auth/signup', {
+    const res = await fetch('https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/auth/signup', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +51,7 @@ export default function DocsPage() {
   async function login(e: Event) {
     e.preventDefault()
 
-    const res = await fetch('http://localhost:8000/api/v1/auth/login', {
+    const res = await fetch('https://nfactorial-ai-cup-2024-eqzu.onrender.com/api/v1/auth/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
