@@ -1,11 +1,11 @@
 # nFactorial-Ai-Cup-2024
 Fork this repository and build nFactorial Ai Cup 2024 projects 
 
-## < Your Name >
+## Dauren Esmuhanov
 
-## < Your App's Name >
+## DauRecipes
 
-## < Your App's description, technical considerations, etc. >
+## Introducing DauRecipes, your personalized meal planning assistant powered by AI. Whether you’re looking to build muscle, lose weight, or maintain a healthy lifestyle, DauRecipes helps you achieve your dietary goals with ease.
 
 
 ## Typeform to submit:
