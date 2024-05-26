@@ -107,7 +107,7 @@ export default function DocsPage() {
                         </Link>
                       </p>
                       <div className="flex gap-2 justify-end">
-                        <Button fullWidth color="primary" onPress={() => login}>
+                        <Button fullWidth color="primary" onClick={login}>
                           Login
                         </Button>
                       </div>
@@ -134,7 +134,7 @@ export default function DocsPage() {
                         </Link>
                       </p>
                       <div className="flex gap-2 justify-end">
-                        <Button fullWidth color="primary" onPress={() => register}>
+                        <Button fullWidth color="primary" onClick={register}>
                           Sign up
                         </Button>
                       </div>
