@@ -1,23 +1,28 @@
-import type { AppProps } from "next/app";
+import type {AppProps} from "next/app";
 
-import { NextUIProvider } from "@nextui-org/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { useRouter } from "next/router";
+import {NextUIProvider} from "@nextui-org/react";
+import {ThemeProvider as NextThemesProvider} from "next-themes";
+import {useRouter} from "next/router";
 
-import { fontSans, fontMono } from "@/config/fonts";
-import "@/styles/globals.css";
+import {fontSans, fontMono} from "@/config/fonts";
+import "../styles/globals.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+import {UserStoreProvider} from '@/providers/user-store-provider'
+
+export default function App({Component, pageProps}: AppProps) {
   const router = useRouter();
 
   return (
-    <NextUIProvider navigate={router.push}>
-      <NextThemesProvider>
-        <Component {...pageProps} />
-      </NextThemesProvider>
-    </NextUIProvider>
+    <UserStoreProvider>
+      <NextUIProvider navigate={router.push}>
+        <NextThemesProvider>
+          <Component {...pageProps} />
+        </NextThemesProvider>
+      </NextUIProvider>
+    </UserStoreProvider>
   );
 }
+
 
 export const fonts = {
   sans: fontSans.style.fontFamily,

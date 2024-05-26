@@ -1,4 +1,7 @@
+import {useUserStore} from "@/providers/user-store-provider";
+
 export type SiteConfig = typeof siteConfig;
+
 
 export const siteConfig = {
   name: "DauRecipes",
@@ -9,20 +12,8 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
+      label: "Plans",
+      href: "/plans",
     },
   ],
   navMenuItems: [
@@ -58,12 +49,17 @@ export const siteConfig = {
       label: "Logout",
       href: "/logout",
     },
+    {
+      label: 'Auth',
+      href: '/auth'
+    }
   ],
   links: {
-    github: "https://github.com/nextui-org/nextui",
+    github: "https://github.com/DaurF/nFactorial-Ai-Cup-2024",
     twitter: "https://twitter.com/getnextui",
     docs: "https://nextui-docs-v2.vercel.app",
     discord: "https://discord.gg/9b6yyZKmH4",
     sponsor: "https://patreon.com/jrgarciadev",
   },
 };
+
