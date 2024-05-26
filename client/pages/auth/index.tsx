@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {Key, useEffect, useState} from "react";
 import {Tabs, Tab, Input, Link, Button, Card, CardBody} from "@nextui-org/react";
 import DefaultLayout from "@/layouts/default";
 import {useRouter} from "next/router";
@@ -72,6 +72,8 @@ export default function DocsPage() {
   }
 
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -84,7 +86,7 @@ export default function DocsPage() {
                   size="md"
                   aria-label="Tabs form"
                   selectedKey={selected}
-                  onSelectionChange={setSelected}
+                  onSelectionChange={(key: any) => setSelected(key)}
                 >
                   <Tab key="login" title="Login">
                     <form className="flex flex-col gap-4">
@@ -105,7 +107,7 @@ export default function DocsPage() {
                         </Link>
                       </p>
                       <div className="flex gap-2 justify-end">
-                        <Button fullWidth color="primary" onClick={login}>
+                        <Button fullWidth color="primary" onPress={() => login}>
                           Login
                         </Button>
                       </div>
@@ -132,7 +134,7 @@ export default function DocsPage() {
                         </Link>
                       </p>
                       <div className="flex gap-2 justify-end">
-                        <Button fullWidth color="primary" onClick={register}>
+                        <Button fullWidth color="primary" onPress={() => register}>
                           Sign up
                         </Button>
                       </div>
